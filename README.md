@@ -81,3 +81,9 @@ civitai：比较主流的AI绘画模型分享网站。可以看到大佬们跑�
 
 Huggingface：一个数据集、模型分享的网站，很多业界大牛也在使用和提交新模型，我们可以从stable diffusion分区下载一些作者训练的模型。个人感觉使用diffusers的时候这个网站比较方便。个人常用的模型是"runwayml/stable-diffusion-v1-5"和"Linaqruf/anything-v3.0"（类似NovelAI的leak模型）。
 
+---
+**手脚等人物精细模型处理**
+1.在负面提示词中添加残缺六指等负面提示词，但是修复效果不明显
+2.在Controlent加载图片使用Openpose获取同款手指姿势，预处理器选择dw，但放大后还是有可能残留问题，进一步安装openpose-editor固定种子数可直接进入图片编辑调整手指状态后，发送至controlnet再次生成
+3.画面中有两只以上的手补模型需要开启第二个controlnet控制单元加载原图选择完美像素模式和Depth，将控制权中降低至0.4-0.6，再将原openopose权重调整至相同的权重，再增加第三个controlnet控制单元加载原图选用soft edge，再次生成图片可完美解决
+4.修改已生成好的样片因为骨骼图已确定的情况下无法直接使用Controlent，选择插件Depth Library，将默认手部模型放在stablediffusionwebui/extensions/sd-webui-depth-lib/maps路径下。
